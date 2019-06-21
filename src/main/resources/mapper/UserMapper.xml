@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comic.dao.UserDao">
+
+    <resultMap id="User_map" type="com.comic.pojo.User">
+        <id property="id" column="l_id" />
+        <result property="userName" column="vc_user_name" />
+        <result property="loginName" column="vc_login_name" />
+        <result property="password" column="vc_password" />
+        <result property="createTime" column="d_create_time" />
+        <result property="remark" column="vc_remark" />
+        <result property="status" column="l_status" />
+    </resultMap>
+    <sql id="User_Column">
+        l_id,
+        vc_user_name,
+        vc_login_name,
+        vc_password,
+        d_create_time,
+        vc_remark,
+        l_status
+    </sql>
+    <!--查询基本字段-->
+    <sql id="User_Where">
+        <where>
+            <if test="id != null">
+                and l_id = #{id}
+            </if>
+            <if test="userName != null and userName != ''">
+                and vc_user_name = #{userName}
+            </if>
+            <if test="loginName != null and loginName != ''">
+                and vc_login_name = #{loginName}
+            </if>
+            <if test="password != null and password != ''">
+                and vc_password = #{password}
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="String" resultMap="User_map" >
+        SELECT
+            <include refid="User_Column"/>
+        FROM
+            sys_user
+        WHERE
+            l_id = #{id}
+    </select>
+
+
+    <insert id="insertSelective" parameterType="com.comic.pojo.User">
+        INSERT INTO sys_user(
+                l_id,
+                vc_user_name,
+                vc_login_name,
+                vc_password,
+                d_create_time,
+                vc_remark,
+                l_status
+        )
+        VALUES(
+                #{id},
+                #{userName},
+                #{loginName},
+                #{password},
+                #{createTime},
+                #{remark},
+                #{status}
+        )
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="String" >
+        DELETE FROM sys_user WHERE l_id = #{id}
+    </delete>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.comic.pojo.User" >
+        UPDATE sys_user
+         SET
+            l_id = #{id},
+            vc_user_name = #{userName},
+            vc_login_name = #{loginName},
+            vc_password = #{password},
+            d_create_time = #{createTime},
+            vc_remark = #{remark},
+            l_status = #{status}
+        WHERE
+            l_id = #{id}
+    </update>
+
+    <sql id="userBaseColum">
+        l_id, vc_user_name
+    </sql>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="User_map" parameterType="com.comic.pojo.User">
+        select
+        <include refid="User_Column"/>
+        from sys_user
+        <include refid="User_Where"/>
+    </select>
+    <select id="selectUserByCondition" resultMap="User_map"  parameterType="com.comic.pojo.User">
+        SELECT
+        <include refid="User_Column"/>
+        FROM
+        sys_user
+        <include refid="User_Where"></include>
+    </select>
+
+    <!--根据用户名角色-->
+    <select id="selectUserRoles" resultType="com.comic.pojo.Role"
+            parameterType="String">
+
+        SELECT
+            r.l_id AS id,
+            r.vc_role_name AS roleName
+        FROM `sys_user_role` ur
+        LEFT JOIN `sys_user` u ON u.l_id = ur.l_user_id
+        LEFT JOIN `sys_role` r ON r.l_id = ur.l_role_id
+        WHERE ur.l_user_id = #{userId}
+
+    </select>
+
+    <select id="selectPermissionsByRoleId" resultType="com.comic.pojo.Permission"
+            parameterType="String">
+        SELECT
+
+            p.l_id AS id,
+            p.vc_permission_name AS permissionName
+        FROM `sys_role_permission` rp
+        LEFT JOIN `sys_role` r ON r.l_id = rp.l_role_id
+        LEFT JOIN `sys_permission` p ON p.l_id = rp.l_permission_id
+        WHERE  r.l_id = ${roleId}
+    </select>
+
+
+</mapper>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- ztree begin -->
+<link rel="stylesheet" href="/plugins/ztree/css/metroStyle/metroStyle.css" type="text/css"/>
+<!-- zree end -->
+
+<div id="USER_ROLE_DIV" class="form dd-edit-form">
+    <div id="userRolePermissionTreeDIV">
+        <ul id="permissionTree" class="ztree"></ul>
+    </div>
+    <form id="ROLE_ACTION_FORM" class="form-horizontal" role="form">
+        <!--<input type="hidden" name="roleId" id="roleId" value="<c:out value='${role.roleId}' />"/>-->
+        <div class="form-actions right">
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="button" class="btn dd-bg-blue dd-color-white" id="saveUserBt"
+                            onclick="Login.saveDeptForInput();">
+                        保存
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- ztree begin -->
+<script type="text/javascript" src="/plugins/ztree/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="/plugins/ztree/js/jquery.ztree.excheck-3.5.js"></script>
+<script type="text/javascript" src="/plugins/ztree/js/jquery.ztree.exhide-3.5.js"></script>
+<!-- ztree end -->

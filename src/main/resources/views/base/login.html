@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/yuan::header_css"></head>
+<link rel="stylesheet" href="/backassist/js/login/css/style.css">
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+<body>
+<div class="cotn_principal">
+    <div class="cont_centrar">
+        <div class="cont_login">
+            <div class="cont_info_log_sign_up">
+                <div class="col_md_login">
+                    <div class="cont_ba_opcitiy">
+                        <h2>登录</h2>
+                        <p>Some things are not to see to insist, but insisted the will sees hope</p>
+                        <button class="btn_login" onClick="cambiar_login()">登录</button>
+                    </div>
+                </div>
+                <div class="col_md_sign_up">
+                    <div class="cont_ba_opcitiy">
+                        <h2>注册</h2>
+                        <p>You have to believe in yourself. That's the secret</p>
+                        <button class="btn_sign_up" onClick="cambiar_sign_up()">注册</button>
+                    </div>
+                </div>
+            </div>
+            <div class="cont_back_info">
+                <div class="cont_img_back_grey"><img src="/backassist/js/login/po.jpg" alt=""/></div>
+            </div>
+            <div class="cont_forms">
+                <div class="cont_img_back_"><img src="/backassist/js/login/po.jpg" alt=""/></div>
+                <div class="cont_form_login"><a href="#" onClick="ocultar_login_sign_up()"><i
+                        class="material-icons">&#xE5C4;</i></a>
+                    <h2>登录</h2>
+                    <input type="text" id="userName" name="userName"
+                           placeholder="请输入用户名"/>
+                    <br>
+                    <span id="msg" style="color: red;"></span>
+                    <input type="password" id="passWord" name="passWord"
+                           placeholder="请输入密码"/>
+                    <button class="btn_login" onclick="Login.onSubmit()">去登录</button>
+                </div>
+                <div class="cont_form_sign_up" style="height: 400px;"><a href="#" onClick="ocultar_login_sign_up()"><i
+                        class="material-icons">&#xE5C4;</i></a>
+                    <h2>注册</h2>
+                    <input type="text" id="userNameReg" name="userName"
+                           placeholder="请输入用户名"/>
+                    <input type="password" id="passWordReg" name="passWord"
+                           placeholder="请输入密码"/>
+                    <input type="password" id="rePassWord" name="rePassWord"
+                           placeholder="请确认密码"/>
+                    <input type="text" id="deptValue" readonly="readonly" onclick="Login.deptZtree()"
+                           placeholder="请选择部门"/>
+                    <input type="hidden" id="dept" name="dept"/>
+                    <button class="btn_sign_up" onclick="Login.registerData()">去注册</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<aside th:replace="common/yuan::footer_js"></aside>
+<script th:src="@{/backassist/js/login/js/login.js}"></script>
+</body>
+</html>
+

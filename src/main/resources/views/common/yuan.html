@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header_css">
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>yuan</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/AdminLTE.min.css}">
+    <link rel="stylesheet" th:href="@{/css/AdminLTE.min.css}">
+    <link rel="stylesheet" th:href="@{/plugins/datepicker/datepicker3.css}">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins folder -->
+    <link rel="stylesheet" th:href="@{/css/all-skins.min.css}">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" th:href="@{/plugins/bootstrapTable/bootstrap-table.css}">
+    <link rel="stylesheet" th:href="@{/plugins/select2/css/select2.min.css}">
+    <link rel="stylesheet" th:href="@{/plugins/jquery-showLoading/jquery-showLoading.css}">
+    <style>
+        .error{
+            color:red;
+        }
+        .success{
+            color:green;
+        }
+    </style>
+</head>
+<body>
+</body>
+<aside th:fragment="footer_js">
+    <!--base-->
+    <script th:src="@{/libs/myboot.js}"></script>
+    <script th:src="@{/libs/jquery.3.2.1.min.js}"></script>
+    <script th:src="@{/libs/bootstrap.min.js}"></script>
+    <!--<script th:src="@{/libs/fastclick.min.js}" src="/libs/fastclick.min.js"></script>-->
+    <script th:src="@{/libs/app.js}" src="/libs/app.js"></script>
+    <!--extend-->
+    <!--<script th:src="@{/plugins/layer/layer.js}" src="/plugins/layer/layer.js"></script>-->
+    <!--<script th:src="@{/plugins/jqgrid/jquery.jqGrid.min.js}"></script>-->
+    <!--datatables-->
+    <!--<script th:src="@{/plugins/datatables/datatables.js}"></script>-->
+    <!--bootbox-->
+    <script th:src="@{/libs/popper.min.js}"></script>
+    <script th:src="@{/libs/bootbox.min.js}"></script>
+    <script th:src="@{/libs/bootbox.locales.js}"></script>
+    <!--bootstarptabel-->
+    <script th:src="@{/plugins/bootstrapTable/bootstrap-table.min.js}"></script>
+    <script th:src="@{/plugins/bootstrapTable/bootstrap-table-zh-CN.js}"></script>
+    <!--datepicker-->
+    <script th:src="@{/plugins/datepicker/bootstrap-datepicker.js}"></script>
+    <!--select2-->
+    <script th:src="@{/plugins/select2/js/select2.min.js}"></script>
+    <!--loading-->
+    <script th:src="@{/plugins/jquery-showLoading/jquery-showLoading.js}"></script>
+    <!--jqueryvalidate-->
+    <script th:src="@{/plugins/jquery-validation/js/jquery.validate.min.js}"></script>
+    <script th:src="@{/plugins/jquery-validation/js/localization/messages_zh_CN.js}"></script>
+</aside>
+</html>

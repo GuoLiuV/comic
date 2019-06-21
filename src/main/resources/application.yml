@@ -1,0 +1,108 @@
+# Tomcat
+server:
+  servlet:
+    # 项目contextPath
+    context-path: /
+    tomcat:
+      # tomcat的URI编码
+      uri-encoding: UTF-8
+      # tomcat最大线程数，默认为200
+      max-threads: 800
+      # Tomcat启动初始化的线程数，默认值25
+      min-spare-threads: 30
+
+# 项目相关配置
+project:
+  # 名称
+  name: comic
+  # 版本
+  version: 1.0.0
+  # 版权年份
+  copyrightYear: 2019
+  # 文件上传路径
+  #profile: D:/profile/
+  # 获取ip地址开关
+  addressEnabled: true
+
+# Mybatis配置
+mybatis:
+  mapperLocations: classpath:mapper/**/*.xml
+  type-aliases-package: com.comic.pojo
+
+  #PageHelper分页插件
+  #pagehelper:
+  #helperDialect: mysql
+  #reasonable: true
+  #supportMethodsArguments: true
+  #params: count=countSql
+
+pagehelper:
+  params: count=countSql
+  close-conn: true
+  reasonable: true
+  #dialect: mysql
+
+logging:
+  level:
+    com.yuanmeng.dao: debug
+    org.springframework: WARN
+    org.spring.springboot.dao: debug
+
+# 用户配置
+user:
+  password:
+    # 密码错误{maxRetryCount}次锁定10分钟
+    maxRetryCount: 5
+
+spring:
+  #不扫描Template路径
+  freemarker:
+    checkTemplateLocation: false
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+  devtools:
+    restart:
+      enabled: true
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  thymeleaf:
+    suffix: .html
+    prefix: classpath:/views/
+    mode: HTML
+    encoding: utf-8
+    cache: false
+    servlet:
+      content-type: text/html
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+    #遇到相同名字就覆盖
+    #main:
+    #allow-bean-definition-overriding: true
+  http:
+    encoding:
+      force: true
+      charset: utf-8
+      enabled: true
+  profiles:
+    active: my_comic
+
+jasypt:
+  encryptor:
+    password: testpassword
+
+---
+
+spring:
+  profiles: my_comic
+  datasource:
+    url: jdbc:mysql://localhost:3306/mycomic?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: root
+server:
+  port: 8080
+logging:
+  path: /usr/local/mydata/myjars

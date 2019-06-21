@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:replace="common/yuan::header_css"></head>
+<!--<link rel="stylesheet" th:href="@{/css/main.css}" href="css/main.css">-->
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper" id="rrapp" v-cloak>
+    <header class="main-header">
+        <a href="javascript:void(0);" class="logo">
+            <span class="logo-mini"><b>试验</b></span>
+            <span class="logo-lg"><b>试验室</b></span>
+        </a>
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!--<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>-->
+            <div style="float:left;color:#fff;padding:15px 10px;">实验室管理系统</div>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li><a class="btn btn-primary" onclick="updateMyPassWord();"><i class="fa fa-euro"></i> &nbsp; 修改密码</a></li>
+                    <li><a class="btn btn-primary" onclick="logout();"><i class="fa fa-gg"></i> &nbsp; 退出系统</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <ul class="sidebar-menu">
+                <shiro:hasPermission name="index">　
+                    <li>
+                        <a th:href="@{/welcome}" th:target="commonframe"><i class="fa fa-industry"></i>首页</a>
+                    </li>
+                </shiro:hasPermission>
+                <li>
+                    <a th:href="@{/bizEntrust/entrustPage}" th:target="commonframe"><i
+                            class="fa fa-opera"></i>委托单</a>
+                </li>
+                <shiro:hasPermission name="plan">　
+                    <li>
+                        <a th:href="@{/bizPlan/initPage}" th:target="commonframe"><i class="fa fa-vimeo"></i>试验计划</a>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="record">　
+                    <li>
+                        <a th:href="@{/bizPlan/initRecordPage.do}" th:target="commonframe"><i class="fa fa-institution"></i>实验项记录界面</a>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="arrange">　
+                    <li>
+                        <a th:href="@{/design/arrangeInitPage.do}" th:target="commonframe"><i class="fa fa-clock-o"></i>试验计划安排表</a>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="quote">　
+                    <li>
+                        <a th:href="@{/bizPlan/initQuote}" th:target="commonframe"><i class="fa fa-bell-o"></i>试验工程师报价</a>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="temp">　
+                    <li>
+                        <a th:href="@{/temp/initListPage.do}" th:target="commonframe"><i
+                                class="fa fa-rocket"></i>样品管理</a>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="design">　
+                    <li>
+                        <a th:href="@{/design/designInitPage.do}" th:target="commonframe"><i class="fa fa-youtube"></i>型式试验计划排班表</a>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="source">　
+                    <li>
+                        <a th:href="@{/bizSource/initPage.do}" th:target="commonframe"><i class="fa fa-drupal"></i>原始试验项</a>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="engineer">　
+                    <li>
+                        <a th:href="@{/bizEngineer/initPage.do}" th:target="commonframe"><i
+                                class="fa fa-arrows-alt"></i>实验设备</a>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="location">　
+                    <li>
+                        <a th:href="@{/bizLocation/locationPage}" th:target="commonframe"><i
+                                class="fa fa-unlock"></i>存储位置</a>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="user">　　
+                    <li>
+                        <a th:href="@{/userManager/userPage}" th:target="commonframe"><i class="fa fa-sitemap"></i>用户管理</a>
+                    </li>
+                </shiro:hasPermission>
+            </ul>
+        </section>
+    </aside>
+    <!-- 右侧主要部分 -->
+    <div class="content-wrapper">
+        <section class="content" style="background:#fff;">
+            <shiro:hasPermission name="index">
+                <iframe scrolling="yes" frameborder="0" name="commonframe"
+                        style="width:100%;min-height:200px;overflow:visible;background:#fff;" th:src="@{/welcome}"></iframe>　
+            </shiro:hasPermission>
+            <shiro:lacksPermission name="index">
+                　<iframe scrolling="yes" frameborder="0" name="commonframe"
+                         style="width:100%;min-height:200px;overflow:visible;background:#fff;" th:src="@{/bizEntrust/entrustPage}"></iframe>　
+            </shiro:lacksPermission>
+        </section>
+    </div>
+
+    <footer class="main-footer" style="">
+        <div class="pull-right hidden-xs">
+            Version 1.0 <a href="javascript:void(0)" onclick="showUpdate();">升级</a>
+        </div>
+            Copyright &copy; <span>[[${#dates.format(new java.util.Date().getTime(), 'yyyy-MM-dd')}]]</span>
+            <a href="" target="_blank">shiyanshi</a> All Rights Reserved
+    </footer>
+    <div class="control-sidebar-bg"></div>
+</div>
+<script th:src="@{/libs/vue.min.js}" src="/libs/vue.min.js"></script>
+<script th:src="@{/libs/router.js}" src="/libs/router.js"></script>
+<aside th:replace="common/yuan::footer_js"></aside>
+<script th:src="@{/backassist/js/back_index.js}"></script>
+</body>
+<script>
+    /*
+    *     常用表达式：
+    • $｛．．．｝变量表达式。
+    • ＊｛ ．． ． ｝ 选择表达式。
+    • ＃｛．．．｝消息文字表达式。
+    • ＠｛｝ 链接url 表达式。
+    • #maps 工具对象表达式。
+
+    常用标签：
+    • th:action 定义后台控制器路径。
+    • th:each 1,盾环语－句。
+    • th:field 表单字段绑定。
+    • th:href 定义超链接。
+    • th:id div 标签中的ID 声明，类似HTML 标签中的归属性。
+    • th:if 条件判断语句。
+    • th:include 布局标签，替换内容到引入文件。
+    • th ：企agment 布局标签，定义一个代码片段，方便其他地方引用。
+    • th:object 替换对象。
+    • th:src 图片类地址引入。
+    • th:text 显示文本。
+    • th:value 属性赋值。
+
+    常用函数：
+    • #dates 日期函数。
+    • #lists 列表函数。
+    • #arrays 数组函数。
+    • #strings 字符串函数。
+    • #numbers 幸生字函捷生。
+    • #ca lendars 日历函数。
+    • #objects 对象函数。
+    • #bools 逻辑函数。
+    */
+</script>
+</html>
